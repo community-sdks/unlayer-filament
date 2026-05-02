@@ -44,7 +44,6 @@ Filament 5 is the recommended target for both new and existing projects when an 
 
 - **Filament 5.x**: use this package line, `composer require zpmlabs/filament-unlayer:^3.0`
 - **Filament 4.x**: use the `v4` branch or the 2.x line, `composer require zpmlabs/filament-unlayer:^2.0`
-- **Filament 3.x**: use the legacy Filament 3 documentation in [FILAMENT_3.md](./FILAMENT_3.md)
 
 Create a cast within your model:
 
