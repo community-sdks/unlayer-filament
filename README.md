@@ -38,6 +38,47 @@ You can install the package via composer:
 composer require zpmlabs/filament-unlayer
 ```
 
+### Install The Livewire Browser Asset
+
+The Filament field depends on the browser asset published by `community-sdks/unlayer-livewire`.
+
+Install it with:
+
+```bash
+php artisan unlayer-livewire:install
+```
+
+This publishes the compiled browser file to:
+
+```txt
+public/unlayer-livewire.js
+```
+
+After upgrading the Livewire package or rebuilding that browser asset locally, publish the latest file again:
+
+```bash
+php artisan vendor:publish --tag=unlayer-livewire-assets --force
+```
+
+If you also want to publish the Livewire config to customize upload storage or other package options:
+
+```bash
+php artisan unlayer-livewire:install --config
+```
+
+To overwrite previously published files during install:
+
+```bash
+php artisan unlayer-livewire:install --force
+```
+
+You can also publish assets or config manually:
+
+```bash
+php artisan vendor:publish --tag=unlayer-livewire-assets --force
+php artisan vendor:publish --tag=unlayer-livewire-config
+```
+
 ### Version Compatibility
 
 Filament 5 is the recommended target for both new and existing projects when an upgrade is possible, because the package flow and UI differ from the older Filament 4 integration.
