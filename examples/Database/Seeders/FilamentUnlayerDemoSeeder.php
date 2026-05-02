@@ -1,9 +1,9 @@
 <?php
 
-namespace ZPMLabs\FilamentUnlayer\Examples\Database\Seeders;
+namespace CommunitySdks\FilamentUnlayer\Examples\Database\Seeders;
 
+use CommunitySdks\FilamentUnlayer\Examples\Models\DemoNewsletterTemplate;
 use Illuminate\Database\Seeder;
-use ZPMLabs\FilamentUnlayer\Examples\Models\DemoNewsletterTemplate;
 
 class FilamentUnlayerDemoSeeder extends Seeder
 {

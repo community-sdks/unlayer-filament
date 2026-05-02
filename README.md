@@ -12,7 +12,7 @@ If you want to try the package quickly in a Laravel app, install it and then ins
 This package ships its example through [`zpmlabs/laravel-package-quick-demo`](https://packagist.org/packages/zpmlabs/laravel-package-quick-demo). The quick demo installer sets up an isolated demo environment for the package so you can try the field without manually wiring routes, database connections, migrations, seeders, or demo views into your main application.
 
 ```bash
-composer require zpmlabs/filament-unlayer
+composer require community-sdks/filament-unlayer
 php artisan quick-demo:install filament-unlayer-demo
 ```
 
@@ -35,7 +35,7 @@ The bundled `Filament Unlayer Demo` includes an email editor tab and a web/page 
 You can install the package via composer:
 
 ```bash
-composer require zpmlabs/filament-unlayer
+composer require community-sdks/filament-unlayer
 ```
 
 ### Install The Livewire Browser Asset
@@ -81,10 +81,9 @@ php artisan vendor:publish --tag=unlayer-livewire-config
 
 ### Version Compatibility
 
-Filament 5 is the recommended target for both new and existing projects when an upgrade is possible, because the package flow and UI differ from the older Filament 4 integration.
+This package targets Filament 5.x only.
 
-- **Filament 5.x**: use this package line, `composer require zpmlabs/filament-unlayer:^3.0`
-- **Filament 4.x**: use the `v4` branch or the 2.x line, `composer require zpmlabs/filament-unlayer:^2.0`
+- **Filament 5.x**: use this package line, `composer require community-sdks/filament-unlayer`
 
 Create a cast within your model:
 

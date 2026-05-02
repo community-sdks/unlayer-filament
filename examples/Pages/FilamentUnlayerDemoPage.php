@@ -1,7 +1,9 @@
 <?php
 
-namespace ZPMLabs\FilamentUnlayer\Examples\Pages;
+namespace CommunitySdks\FilamentUnlayer\Examples\Pages;
 
+use CommunitySdks\FilamentUnlayer\Examples\Models\DemoNewsletterTemplate;
+use CommunitySdks\FilamentUnlayer\Forms\Components\Unlayer;
 use Filament\Actions\Action;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
@@ -10,8 +12,6 @@ use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Components\Tabs\Tab;
 use Filament\Schemas\Schema;
 use Livewire\Attributes\Url;
-use ZPMLabs\FilamentUnlayer\Examples\Models\DemoNewsletterTemplate;
-use ZPMLabs\FilamentUnlayer\Forms\Components\Unlayer;
 
 /**
  * @property Schema $content

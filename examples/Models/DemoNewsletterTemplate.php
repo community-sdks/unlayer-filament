@@ -1,6 +1,6 @@
 <?php
 
-namespace ZPMLabs\FilamentUnlayer\Examples\Models;
+namespace CommunitySdks\FilamentUnlayer\Examples\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use ZPMLabs\LaravelPackageQuickDemo\Facades\QuickDemo;

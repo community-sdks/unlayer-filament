@@ -1,15 +1,15 @@
 {
-    "name": "zpmlabs/filament-unlayer",
+    "name": "community-sdks/filament-unlayer",
     "description": "Filament wrapper for unlayer editor.",
     "keywords": [
-        "ZPM Labs",
+        "Community SDKs",
         "laravel",
         "filament-unlayer"
     ],
-    "homepage": "https://github.com/zpm-packages/filament-unlayer",
+    "homepage": "https://github.com/community-sdks/filament-unlayer",
     "support": {
-        "issues": "https://github.com/zpm-packages/filament-unlayer/issues",
-        "source": "https://github.com/zpm-packages/filament-unlayer"
+        "issues": "https://github.com/community-sdks/filament-unlayer/issues",
+        "source": "https://github.com/community-sdks/filament-unlayer"
     },
     "license": "MIT",
     "authors": [
@@ -36,13 +36,13 @@
     },
     "autoload": {
         "psr-4": {
-            "ZPMLabs\\FilamentUnlayer\\Examples\\": "examples/",
-            "ZPMLabs\\FilamentUnlayer\\": "src/"
+            "CommunitySdks\\FilamentUnlayer\\Examples\\": "examples/",
+            "CommunitySdks\\FilamentUnlayer\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ZPMLabs\\FilamentUnlayer\\Tests\\": "tests/"
+            "CommunitySdks\\FilamentUnlayer\\Tests\\": "tests/"
         }
     },
     "scripts": {
@@ -61,10 +61,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "ZPMLabs\\FilamentUnlayer\\UnlayerServiceProvider"
+                "CommunitySdks\\FilamentUnlayer\\UnlayerServiceProvider"
             ],
             "aliases": {
-                "FilamentUnlayer": "ZPMLabs\\FilamentUnlayer\\Facades\\Unlayer"
+                "FilamentUnlayer": "CommunitySdks\\FilamentUnlayer\\Facades\\Unlayer"
             }
         }
     },

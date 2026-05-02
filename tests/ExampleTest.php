@@ -1,11 +1,11 @@
 <?php
 
+use CommunitySdks\FilamentUnlayer\Examples\Database\Seeders\FilamentUnlayerDemoSeeder;
+use CommunitySdks\FilamentUnlayer\Examples\Models\DemoNewsletterTemplate;
+use CommunitySdks\FilamentUnlayer\Examples\Pages\FilamentUnlayerDemoPage;
+use CommunitySdks\FilamentUnlayer\Forms\Components\Unlayer;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
-use ZPMLabs\FilamentUnlayer\Examples\Database\Seeders\FilamentUnlayerDemoSeeder;
-use ZPMLabs\FilamentUnlayer\Examples\Models\DemoNewsletterTemplate;
-use ZPMLabs\FilamentUnlayer\Examples\Pages\FilamentUnlayerDemoPage;
-use ZPMLabs\FilamentUnlayer\Forms\Components\Unlayer;
 use ZPMLabs\LaravelPackageQuickDemo\Facades\QuickDemo;
 
 it('configures the unlayer field defaults', function () {
@@ -72,6 +72,7 @@ it('requires filament v5 packages', function () {
     $composer = json_decode(file_get_contents(__DIR__ . '/../composer.json'), true);
 
     expect($composer)->not->toHaveKey('version')
+        ->and($composer['name'])->toBe('community-sdks/filament-unlayer')
         ->and($composer['require']['php'])->toBe('^8.3')
         ->and($composer['require']['community-sdks/unlayer-livewire'])->toBe('^1.0')
         ->and($composer['require']['filament/filament'])->toBe('^5.0')

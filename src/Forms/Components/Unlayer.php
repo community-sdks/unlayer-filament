@@ -1,6 +1,6 @@
 <?php
 
-namespace ZPMLabs\FilamentUnlayer\Forms\Components;
+namespace CommunitySdks\FilamentUnlayer\Forms\Components;
 
 use Filament\Forms\Components\Field;
 

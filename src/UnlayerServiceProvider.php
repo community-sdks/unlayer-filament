@@ -1,10 +1,10 @@
 <?php
 
-namespace ZPMLabs\FilamentUnlayer;
+namespace CommunitySdks\FilamentUnlayer;
 
+use CommunitySdks\FilamentUnlayer\Examples\Database\Seeders\FilamentUnlayerDemoSeeder;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use ZPMLabs\FilamentUnlayer\Examples\Database\Seeders\FilamentUnlayerDemoSeeder;
 use ZPMLabs\LaravelPackageQuickDemo\Facades\QuickDemo;
 use ZPMLabs\LaravelPackageQuickDemo\Support\DemoDefinition;
 
