@@ -2,6 +2,7 @@
 
 <img width="2560" height="1440" alt="UnlayerFilament" src="https://github.com/user-attachments/assets/65cea402-7472-41c6-a9e6-ee8448e18da1" />
 
+
 This is a Filament field wrapper for the Unlayer editor. It delegates the editor runtime to [`community-sdks/unlayer-livewire`](https://packagist.org/packages/community-sdks/unlayer-livewire), which wraps the Alpine and TypeScript SDK packages.
 
 ## Try The Example
