@@ -1,18 +1,25 @@
-<x-dynamic-component 
+<x-dynamic-component
     :component="$getFieldWrapperView()"
     :field="$field"
 >
     <div
-        x-load
-        x-load-src="{{ \Filament\Support\Facades\FilamentAsset::getAlpineComponentSrc('filament-unlayer', 'ZPMLabs/filament-unlayer') }}"
-        x-data="initUnlayer({
-            state: $wire.entangle('{{ $getStatePath() }}'),
-            displayMode: '{{ $getDisplayMode() }}',
-            id: '{{ $getId() }}',
-            uploadUrl: '{{ $getUploadUrl() }}',
-            additionalOptions: {{ json_encode($getAdditionalOptions()) }}
-        })"
+        x-data="{}"
+        x-on:unlayer-livewire:exported.window="
+            if ($event.detail.id === @js($getId())) {
+                window.Livewire.find(@js($this->getId())).$set(@js($getStatePath()), $event.detail.state, @js($shouldSyncLive()))
+            }
+        "
     >
-        <div wire:ignore x-ref="unlayer" id="{{$getId()}}" style="height: {{ $getHeight() }};"></div>
+    <livewire:unlayer-livewire.editor
+        :state="$getState()"
+        :display-mode="$getDisplayMode()"
+        :height="$getHeight()"
+        :sync-live="$shouldSyncLive()"
+        :unlayer-options="$getAdditionalOptions()"
+        :template-search="$getTemplateSearchOptions()"
+        :template-picker="$getTemplatePickerOptions()"
+        :editor-id="$getId()"
+        wire:key="{{ $getId() }}-livewire-editor"
+    />
     </div>
 </x-dynamic-component>

@@ -2,12 +2,11 @@
 
 namespace ZPMLabs\FilamentUnlayer;
 
-use Filament\Support\Assets\AlpineComponent;
-use Filament\Support\Assets\Asset;
-use Filament\Support\Assets\Css;
-use Filament\Support\Facades\FilamentAsset;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
+use ZPMLabs\FilamentUnlayer\Examples\Database\Seeders\FilamentUnlayerDemoSeeder;
+use ZPMLabs\LaravelPackageQuickDemo\Facades\QuickDemo;
+use ZPMLabs\LaravelPackageQuickDemo\Support\DemoDefinition;
 
 class UnlayerServiceProvider extends PackageServiceProvider
 {
@@ -21,16 +20,8 @@ class UnlayerServiceProvider extends PackageServiceProvider
          * This class is a Package Service Provider
          *
          * More info: https://github.com/spatie/laravel-package-tools
-         */
+        */
         $package->name(static::$name);
-
-        $configFileName = $package->shortName();
-
-        if (file_exists($package->basePath("/../config/{$configFileName}.php"))) {
-            $package->hasConfigFile();
-        }
-
-        $package->hasRoute('web');
 
         if (file_exists($package->basePath('/../resources/views'))) {
             $package->hasViews(static::$viewNamespace);
@@ -41,26 +32,22 @@ class UnlayerServiceProvider extends PackageServiceProvider
 
     public function packageBooted(): void
     {
-        // Asset Registration
-        FilamentAsset::register(
-            $this->getAssets(),
-            $this->getAssetPackageName()
+        $this->registerQuickDemo();
+    }
+
+    protected function registerQuickDemo(): void
+    {
+        QuickDemo::register(
+            DemoDefinition::make(
+                key: 'filament-unlayer-demo',
+                name: 'Filament Unlayer Demo',
+                databaseName: 'filament_unlayer_demo',
+                migrationsPath: __DIR__ . '/../examples/migrations',
+                seeders: [
+                    FilamentUnlayerDemoSeeder::class,
+                ],
+                viewsPath: __DIR__ . '/../examples/views',
+            )
         );
-    }
-
-    protected function getAssetPackageName(): ?string
-    {
-        return 'ZPMLabs/filament-unlayer';
-    }
-
-    /**
-     * @return array<Asset>
-     */
-    protected function getAssets(): array
-    {
-        return [
-            AlpineComponent::make('filament-unlayer', __DIR__ . '/../resources/dist/filament-unlayer.js'),
-            Css::make('filament-unlayer', __DIR__ . '/../resources/dist/filament-unlayer.css'),
-        ];
     }
 }

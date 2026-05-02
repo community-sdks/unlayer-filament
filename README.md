@@ -2,30 +2,49 @@
 
 ![image](https://github.com/user-attachments/assets/92204605-3edf-48ba-81a8-0eadce20b2c5)
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/ZPMLabs/filament-unlayer.svg?style=flat-square)](https://packagist.org/packages/ZPMLabs/filament-unlayer)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/ZPMLabs/filament-unlayer/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/ZPMLabs/filament-unlayer/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/ZPMLabs/filament-unlayer.svg?style=flat-square)](https://packagist.org/packages/ZPMLabs/filament-unlayer)
 
+This is a Filament field wrapper for the Unlayer editor. It delegates the editor runtime to [`community-sdks/unlayer-livewire`](https://packagist.org/packages/community-sdks/unlayer-livewire), which wraps the Alpine and TypeScript SDK packages.
 
-This is a filament wrapper for unlayer editor with custom select field with unlayer templates.
+## Try The Example
+
+If you want to try the package quickly in a Laravel app, install it and then install the bundled quick demo:
+
+This package ships its example through [`zpmlabs/laravel-package-quick-demo`](https://packagist.org/packages/zpmlabs/laravel-package-quick-demo). The quick demo installer sets up an isolated demo environment for the package so you can try the field without manually wiring routes, database connections, migrations, seeders, or demo views into your main application.
+
+```bash
+composer require zpmlabs/filament-unlayer
+php artisan quick-demo:install filament-unlayer-demo
+```
+
+To inspect the registered demo or see its route details:
+
+```bash
+php artisan quick-demo:show filament-unlayer-demo
+```
+
+The bundled `Filament Unlayer Demo` includes an email editor tab and a web/page editor tab, both backed by isolated quick-demo data.
 
 ## Requirements
 
-- PHP 8.2+
-- Laravel 10+
-- Filament 4.x
+- PHP 8.3+
+- Laravel 13+
+- Filament 5.x
 
 ## Installation
 
 You can install the package via composer:
 
 ```bash
-composer require ZPMLabs/filament-unlayer
+composer require zpmlabs/filament-unlayer
 ```
 
 ### Version Compatibility
-- **Filament 4.x** → Use this version (2.x)
-- **Filament 3.x** → Use version 1.x: `composer require ZPMLabs/filament-unlayer:^1.0`
+
+Filament 5 is the recommended target for both new and existing projects when an upgrade is possible, because the package flow and UI differ from the older Filament 4 integration.
+
+- **Filament 5.x**: use this package line, `composer require zpmlabs/filament-unlayer:^3.0`
+- **Filament 4.x**: use the `v4` branch or the 2.x line, `composer require zpmlabs/filament-unlayer:^2.0`
+- **Filament 3.x**: use the legacy Filament 3 documentation in [FILAMENT_3.md](./FILAMENT_3.md)
 
 Create a cast within your model:
 
@@ -35,10 +54,12 @@ protected $casts = [
 ];
 ```
 
-You can publish the config file with:
+The field stores the editor state as an array containing both `html` and `design`.
+
+If you want to customize uploads or the template proxy route prefix, publish the Livewire package config:
 
 ```bash
-php artisan vendor:publish --tag="filament-unlayer-config"
+php artisan vendor:publish --tag="unlayer-livewire-config"
 ```
 
 Optionally, you can publish the views using
@@ -55,21 +76,49 @@ As any other filament form field:
 Unlayer::make('content')->required()
 ```
 
-In case you want to select unlayer templates you can use:
+In case you want users to choose Unlayer stock templates from inside the editor, enable the template picker:
 
 ```php
-SelectTemplate::make('template'),
-Unlayer::make('content')->required()
+Unlayer::make('content')
+    ->required()
+    ->templatePicker()
 ```
 
-By default the Unlayer field name should `content` but if you need to change it you will need to update `SelectTemplate`:
+The picker loads templates through the Livewire package's same-origin backend proxy and applies the selected design directly to the initialized editor.
+
+You can customize the default stock template query:
 
 ```php
-SelectTemplate::make('template')
-    ->afterStateUpdated(fn (string $operation, $state, Forms\Set $set)
-        => $set('description', ZPMLabs\FilamentUnlayer\Services\GetTemplates::find($state))
-    ),
-Unlayer::make('description')->required()
+Unlayer::make('content')
+    ->templatePicker(options: [
+        'type' => 'email', // or 'web'
+        'premium' => false,
+        'limit' => 20,
+        'offset' => 0,
+        'collection' => '',
+        'sort' => 'recent',
+    ])
+```
+
+You can customize the picker toolbar and panel labels:
+
+```php
+Unlayer::make('content')
+    ->templatePicker()
+    ->templatePickerOptions([
+        'label' => 'Template Editor',
+        'triggerLabel' => 'Search templates',
+        'title' => 'Templates',
+        'placeholder' => 'Search templates',
+        'emptyText' => 'No templates found.',
+    ])
+```
+
+Live syncing is disabled by default. If you want every editor change to sync immediately through Livewire, enable it explicitly:
+
+```php
+Unlayer::make('content')
+    ->syncLive()
 ```
 
 If you want to pass additional options to unlayer, which will join default object set by plugin with your additional data you can use:
@@ -81,23 +130,32 @@ Unlayer::make('description')
     ])
 ```
 
-In case you want to customize SelectTemplate options you can chain these methods:
+The built-in Livewire proxy exists because Unlayer's stock template endpoints do not allow direct browser CORS requests. Behind the proxy, template search calls:
 
-```php
-SelectTemplate::make('template')
-    ->type('email') // or 'page', 'popup', ...
-    ->isPremium(true) // shows only permium templates
-    ->limit(50) // number of templates per search
-    ->offset(0) // offset for pagination if needed
-    ->collection('my-collection') // filtering by collection
-    ->sortBy('recent') // or 'popular', 'oldest', ...
+```txt
+POST https://unlayer.com/templates/search
+Content-Type: application/json
 ```
 
-Or if you want to fully upgrade template selection by your custom code, you can do it by overriding `'templateResolver' => \ZPMLabs\FilamentUnlayer\Services\GetTemplates::class,` config line.
+The field's `templatePicker(options: [...])` values map to the upstream request body like this:
 
-You can still chain other methods on these since:
+```txt
+search     -> filter.name
+type       -> filter.type
+premium    -> filter.premium, "true" when true, "" when false
+limit      -> perPage
+offset     -> page, calculated as floor(offset / limit) + 1
+collection -> filter.collection
+sort       -> filter.sortBy
+```
 
-`SelectTemplate` is extending filament `Select` field.
+Selected templates are loaded through:
+
+```txt
+POST https://studio.unlayer.com/api/v1/graphql
+```
+
+The Livewire package also supports overriding its route prefix and middleware in `config/unlayer-livewire.php`.
 
 `Unlayer` is extending filament `Field` class.
 

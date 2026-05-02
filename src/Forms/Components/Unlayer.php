@@ -10,13 +10,26 @@ class Unlayer extends Field
 
     protected string $displayMode = 'email';
 
+    /**
+     * @var array<string, mixed>
+     */
     protected array $additionalOptions = [];
 
-    // protected mixed $defaultState = [
-    //     'html' => '', 'design' => []
-    // ];
-    // protected bool $hasDefaultState = true;
-    protected $height = '70svh';
+    protected string $height = '70svh';
+
+    protected bool $hasTemplatePicker = false;
+
+    /**
+     * @var array<string, mixed>
+     */
+    protected array $templatePickerOptions = [];
+
+    /**
+     * @var array<string, mixed>
+     */
+    protected array $templateSearchOptions = [];
+
+    protected bool $syncLive = false;
 
     public static function make(?string $name = null): static
     {
@@ -34,7 +47,7 @@ class Unlayer extends Field
         return $this;
     }
 
-    public function height($height): static
+    public function height(string $height): static
     {
         $this->height = $height;
 
@@ -46,16 +59,83 @@ class Unlayer extends Field
         return $this->displayMode;
     }
 
-    public function getHeight()
+    public function getHeight(): string
     {
         return $this->height;
     }
 
-    public function getUploadUrl(): string
+    /**
+     * @param  array<string, mixed>  $options
+     */
+    public function templatePicker(bool $condition = true, array $options = []): static
     {
-        return route(config('filament-unlayer.upload.url_name'));
+        $this->hasTemplatePicker = $condition;
+        $this->templateSearchOptions = $options;
+
+        return $this;
     }
 
+    public function hasTemplatePicker(): bool
+    {
+        return $this->hasTemplatePicker;
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    public function getTemplateSearchOptions(): array
+    {
+        if (! $this->hasTemplatePicker) {
+            return [];
+        }
+
+        return array_merge([
+            'search' => '',
+            'type' => $this->displayMode,
+            'premium' => false,
+            'limit' => 20,
+            'offset' => 0,
+            'collection' => '',
+            'sort' => 'recent',
+        ], $this->templateSearchOptions);
+    }
+
+    /**
+     * @param  array<string, mixed>  $options
+     */
+    public function templatePickerOptions(array $options): static
+    {
+        $this->templatePickerOptions = $options;
+
+        return $this;
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    public function getTemplatePickerOptions(): array
+    {
+        if (! $this->hasTemplatePicker) {
+            return [
+                'enabled' => false,
+                'showTrigger' => false,
+            ];
+        }
+
+        return array_merge([
+            'enabled' => true,
+            'showTrigger' => true,
+            'label' => $this->getLabel() ?? 'Template Editor',
+            'triggerLabel' => 'Search templates',
+            'title' => 'Templates',
+            'placeholder' => 'Search templates',
+            'emptyText' => 'No templates found.',
+        ], $this->templatePickerOptions);
+    }
+
+    /**
+     * @param  array<string, mixed>  $additionalOptions
+     */
     public function additionalOptions(array $additionalOptions): static
     {
         $this->additionalOptions = $additionalOptions;
@@ -63,8 +143,23 @@ class Unlayer extends Field
         return $this;
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function getAdditionalOptions(): array
     {
         return $this->additionalOptions;
+    }
+
+    public function syncLive(bool $condition = true): static
+    {
+        $this->syncLive = $condition;
+
+        return $this;
+    }
+
+    public function shouldSyncLive(): bool
+    {
+        return $this->syncLive;
     }
 }

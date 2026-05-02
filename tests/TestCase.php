@@ -17,6 +17,7 @@ use Livewire\LivewireServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 use RyanChandler\BladeCaptureDirective\BladeCaptureDirectiveServiceProvider;
 use ZPMLabs\FilamentUnlayer\UnlayerServiceProvider;
+use ZPMLabs\LaravelPackageQuickDemo\LaravelPackageQuickDemoServiceProvider;
 
 class TestCase extends Orchestra
 {
@@ -44,6 +45,7 @@ class TestCase extends Orchestra
             SupportServiceProvider::class,
             TablesServiceProvider::class,
             WidgetsServiceProvider::class,
+            LaravelPackageQuickDemoServiceProvider::class,
             UnlayerServiceProvider::class,
         ];
     }
