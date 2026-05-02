@@ -1,9 +1,9 @@
 <?php
 
-namespace CommunitySdks\FilamentUnlayer\Examples\Pages;
+namespace CommunitySdks\UnlayerFilament\Examples\Pages;
 
-use CommunitySdks\FilamentUnlayer\Examples\Models\DemoNewsletterTemplate;
-use CommunitySdks\FilamentUnlayer\Forms\Components\Unlayer;
+use CommunitySdks\UnlayerFilament\Examples\Models\DemoNewsletterTemplate;
+use CommunitySdks\UnlayerFilament\Forms\Components\Unlayer;
 use Filament\Actions\Action;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
@@ -16,11 +16,11 @@ use Livewire\Attributes\Url;
 /**
  * @property Schema $content
  */
-class FilamentUnlayerDemoPage extends Page
+class UnlayerFilamentDemoPage extends Page
 {
-    protected string $view = 'quick-demo-filament-unlayer-demo::page';
+    protected string $view = 'quick-demo-unlayer-filament-demo::page';
 
-    protected static ?string $title = 'Filament Unlayer Demo';
+    protected static ?string $title = 'Unlayer Filament Demo';
 
     protected static bool $shouldRegisterNavigation = true;
 

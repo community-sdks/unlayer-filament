@@ -1,12 +1,12 @@
 <?php
 
-namespace CommunitySdks\FilamentUnlayer\Forms\Components;
+namespace CommunitySdks\UnlayerFilament\Forms\Components;
 
 use Filament\Forms\Components\Field;
 
 class Unlayer extends Field
 {
-    protected string $view = 'filament-unlayer::filament-unlayer';
+    protected string $view = 'unlayer-filament::unlayer-filament';
 
     protected string $displayMode = 'email';
 

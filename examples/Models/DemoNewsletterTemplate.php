@@ -1,6 +1,6 @@
 <?php
 
-namespace CommunitySdks\FilamentUnlayer\Examples\Models;
+namespace CommunitySdks\UnlayerFilament\Examples\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use ZPMLabs\LaravelPackageQuickDemo\Facades\QuickDemo;
@@ -19,7 +19,7 @@ class DemoNewsletterTemplate extends Model
 
     public function getConnectionName(): string
     {
-        return QuickDemo::connectionName('filament-unlayer-demo');
+        return QuickDemo::connectionName('unlayer-filament-demo');
     }
 
     protected function casts(): array

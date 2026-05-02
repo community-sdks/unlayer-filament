@@ -9,7 +9,7 @@ return new class extends Migration
 {
     public function getConnection(): string
     {
-        return QuickDemo::connectionName('filament-unlayer-demo');
+        return QuickDemo::connectionName('unlayer-filament-demo');
     }
 
     public function up(): void

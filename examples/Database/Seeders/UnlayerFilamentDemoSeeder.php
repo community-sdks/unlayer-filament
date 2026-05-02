@@ -1,11 +1,11 @@
 <?php
 
-namespace CommunitySdks\FilamentUnlayer\Examples\Database\Seeders;
+namespace CommunitySdks\UnlayerFilament\Examples\Database\Seeders;
 
-use CommunitySdks\FilamentUnlayer\Examples\Models\DemoNewsletterTemplate;
+use CommunitySdks\UnlayerFilament\Examples\Models\DemoNewsletterTemplate;
 use Illuminate\Database\Seeder;
 
-class FilamentUnlayerDemoSeeder extends Seeder
+class UnlayerFilamentDemoSeeder extends Seeder
 {
     public function run(): void
     {

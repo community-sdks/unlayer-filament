@@ -1,9 +1,9 @@
 <?php
 
-use CommunitySdks\FilamentUnlayer\Examples\Database\Seeders\FilamentUnlayerDemoSeeder;
-use CommunitySdks\FilamentUnlayer\Examples\Models\DemoNewsletterTemplate;
-use CommunitySdks\FilamentUnlayer\Examples\Pages\FilamentUnlayerDemoPage;
-use CommunitySdks\FilamentUnlayer\Forms\Components\Unlayer;
+use CommunitySdks\UnlayerFilament\Examples\Database\Seeders\UnlayerFilamentDemoSeeder;
+use CommunitySdks\UnlayerFilament\Examples\Models\DemoNewsletterTemplate;
+use CommunitySdks\UnlayerFilament\Examples\Pages\UnlayerFilamentDemoPage;
+use CommunitySdks\UnlayerFilament\Forms\Components\Unlayer;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use ZPMLabs\LaravelPackageQuickDemo\Facades\QuickDemo;
@@ -72,7 +72,7 @@ it('requires filament v5 packages', function () {
     $composer = json_decode(file_get_contents(__DIR__ . '/../composer.json'), true);
 
     expect($composer)->not->toHaveKey('version')
-        ->and($composer['name'])->toBe('community-sdks/filament-unlayer')
+        ->and($composer['name'])->toBe('community-sdks/unlayer-filament')
         ->and($composer['require']['php'])->toBe('^8.3')
         ->and($composer['require']['community-sdks/unlayer-livewire'])->toBe('^1.0')
         ->and($composer['require']['filament/filament'])->toBe('^5.0')
@@ -88,12 +88,12 @@ it('requires filament v5 packages', function () {
 });
 
 it('registers the quick demo definition', function () {
-    $demo = QuickDemo::get('filament-unlayer-demo');
+    $demo = QuickDemo::get('unlayer-filament-demo');
 
-    expect($demo->key)->toBe('filament-unlayer-demo')
-        ->and($demo->name)->toBe('Filament Unlayer Demo')
-        ->and($demo->databaseName)->toBe('filament_unlayer_demo')
-        ->and($demo->connectionName())->toBe('quick_demo_filament_unlayer_demo')
+    expect($demo->key)->toBe('unlayer-filament-demo')
+        ->and($demo->name)->toBe('Unlayer Filament Demo')
+        ->and($demo->databaseName)->toBe('unlayer_filament_demo')
+        ->and($demo->connectionName())->toBe('quick_demo_unlayer_filament_demo')
         ->and($demo->routesPath)->toBeNull()
         ->and($demo->migrationsPath)->toEndWith('examples/migrations');
 });
@@ -101,21 +101,21 @@ it('registers the quick demo definition', function () {
 it('uses the quick demo connection for demo editor state', function () {
     $model = new DemoNewsletterTemplate;
 
-    expect($model->getConnectionName())->toBe('quick_demo_filament_unlayer_demo')
+    expect($model->getConnectionName())->toBe('quick_demo_unlayer_filament_demo')
         ->and($model->getTable())->toBe('demo_newsletter_templates');
 });
 
 it('renders only the active quick demo tab panel', function () {
-    $page = new FilamentUnlayerDemoPage;
+    $page = new UnlayerFilamentDemoPage;
 
     expect($page->activeTab)->toBe('email')
-        ->and(file_get_contents(__DIR__ . '/../examples/Pages/FilamentUnlayerDemoPage.php'))
+        ->and(file_get_contents(__DIR__ . '/../examples/Pages/UnlayerFilamentDemoPage.php'))
         ->toContain("->livewireProperty('activeTab')")
         ->toContain("#[Url(as: 'example')]");
 });
 
 it('syncs editor exports back to the filament field state', function () {
-    $view = file_get_contents(__DIR__ . '/../resources/views/filament-unlayer.blade.php');
+    $view = file_get_contents(__DIR__ . '/../resources/views/unlayer-filament.blade.php');
 
     expect($view)
         ->toContain('x-on:unlayer-livewire:exported.window')
@@ -124,8 +124,8 @@ it('syncs editor exports back to the filament field state', function () {
 });
 
 it('migrates and seeds the unlayer demo database', function () {
-    $databasePath = QuickDemo::databasePath('filament-unlayer-demo');
-    $connectionName = QuickDemo::connectionName('filament-unlayer-demo');
+    $databasePath = QuickDemo::databasePath('unlayer-filament-demo');
+    $connectionName = QuickDemo::connectionName('unlayer-filament-demo');
     $migration = include __DIR__ . '/../examples/migrations/2026_01_01_000001_create_demo_newsletter_templates_table.php';
     $migrated = false;
 
@@ -138,8 +138,8 @@ it('migrates and seeds the unlayer demo database', function () {
         $migration->up();
         $migrated = true;
 
-        (new FilamentUnlayerDemoSeeder)->run();
-        (new FilamentUnlayerDemoSeeder)->run();
+        (new UnlayerFilamentDemoSeeder)->run();
+        (new UnlayerFilamentDemoSeeder)->run();
 
         $template = DemoNewsletterTemplate::query()->first();
 

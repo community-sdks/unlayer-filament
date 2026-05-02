@@ -1,4 +1,4 @@
-# Filament Unlayer
+# Unlayer Filament
 
 ![image](https://github.com/user-attachments/assets/92204605-3edf-48ba-81a8-0eadce20b2c5)
 
@@ -12,17 +12,17 @@ If you want to try the package quickly in a Laravel app, install it and then ins
 This package ships its example through [`zpmlabs/laravel-package-quick-demo`](https://packagist.org/packages/zpmlabs/laravel-package-quick-demo). The quick demo installer sets up an isolated demo environment for the package so you can try the field without manually wiring routes, database connections, migrations, seeders, or demo views into your main application.
 
 ```bash
-composer require community-sdks/filament-unlayer
-php artisan quick-demo:install filament-unlayer-demo
+composer require community-sdks/unlayer-filament
+php artisan quick-demo:install unlayer-filament-demo
 ```
 
 To inspect the registered demo or see its route details:
 
 ```bash
-php artisan quick-demo:show filament-unlayer-demo
+php artisan quick-demo:show unlayer-filament-demo
 ```
 
-The bundled `Filament Unlayer Demo` includes an email editor tab and a web/page editor tab, both backed by isolated quick-demo data.
+The bundled `Unlayer Filament Demo` includes an email editor tab and a web/page editor tab, both backed by isolated quick-demo data.
 
 ## Requirements
 
@@ -35,7 +35,7 @@ The bundled `Filament Unlayer Demo` includes an email editor tab and a web/page 
 You can install the package via composer:
 
 ```bash
-composer require community-sdks/filament-unlayer
+composer require community-sdks/unlayer-filament
 ```
 
 ### Install The Livewire Browser Asset
@@ -83,7 +83,7 @@ php artisan vendor:publish --tag=unlayer-livewire-config
 
 This package targets Filament 5.x only.
 
-- **Filament 5.x**: use this package line, `composer require community-sdks/filament-unlayer`
+- **Filament 5.x**: use this package line, `composer require community-sdks/unlayer-filament`
 
 Create a cast within your model:
 
@@ -104,7 +104,7 @@ php artisan vendor:publish --tag="unlayer-livewire-config"
 Optionally, you can publish the views using
 
 ```bash
-php artisan vendor:publish --tag="filament-unlayer-views"
+php artisan vendor:publish --tag="unlayer-filament-views"
 ```
 
 ## Usage

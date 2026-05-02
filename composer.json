@@ -1,15 +1,15 @@
 {
-    "name": "community-sdks/filament-unlayer",
+    "name": "community-sdks/unlayer-filament",
     "description": "Filament wrapper for unlayer editor.",
     "keywords": [
         "Community SDKs",
         "laravel",
-        "filament-unlayer"
+        "unlayer-filament"
     ],
-    "homepage": "https://github.com/community-sdks/filament-unlayer",
+    "homepage": "https://github.com/community-sdks/unlayer-filament",
     "support": {
-        "issues": "https://github.com/community-sdks/filament-unlayer/issues",
-        "source": "https://github.com/community-sdks/filament-unlayer"
+        "issues": "https://github.com/community-sdks/unlayer-filament/issues",
+        "source": "https://github.com/community-sdks/unlayer-filament"
     },
     "license": "MIT",
     "authors": [
@@ -36,13 +36,13 @@
     },
     "autoload": {
         "psr-4": {
-            "CommunitySdks\\FilamentUnlayer\\Examples\\": "examples/",
-            "CommunitySdks\\FilamentUnlayer\\": "src/"
+            "CommunitySdks\\UnlayerFilament\\Examples\\": "examples/",
+            "CommunitySdks\\UnlayerFilament\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "CommunitySdks\\FilamentUnlayer\\Tests\\": "tests/"
+            "CommunitySdks\\UnlayerFilament\\Tests\\": "tests/"
         }
     },
     "scripts": {
@@ -61,10 +61,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "CommunitySdks\\FilamentUnlayer\\UnlayerServiceProvider"
+                "CommunitySdks\\UnlayerFilament\\UnlayerServiceProvider"
             ],
             "aliases": {
-                "FilamentUnlayer": "CommunitySdks\\FilamentUnlayer\\Facades\\Unlayer"
+                "UnlayerFilament": "CommunitySdks\\UnlayerFilament\\Facades\\Unlayer"
             }
         }
     },

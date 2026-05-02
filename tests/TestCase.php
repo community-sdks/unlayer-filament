@@ -1,10 +1,10 @@
 <?php
 
-namespace CommunitySdks\FilamentUnlayer\Tests;
+namespace CommunitySdks\UnlayerFilament\Tests;
 
 use BladeUI\Heroicons\BladeHeroiconsServiceProvider;
 use BladeUI\Icons\BladeIconsServiceProvider;
-use CommunitySdks\FilamentUnlayer\UnlayerServiceProvider;
+use CommunitySdks\UnlayerFilament\UnlayerServiceProvider;
 use Filament\Actions\ActionsServiceProvider;
 use Filament\FilamentServiceProvider;
 use Filament\Forms\FormsServiceProvider;
@@ -26,7 +26,7 @@ class TestCase extends Orchestra
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'CommunitySdks\\FilamentUnlayer\\Database\\Factories\\' . class_basename($modelName) . 'Factory'
+            fn (string $modelName) => 'CommunitySdks\\UnlayerFilament\\Database\\Factories\\' . class_basename($modelName) . 'Factory'
         );
     }
 

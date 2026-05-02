@@ -1,8 +1,8 @@
 <?php
 
-namespace CommunitySdks\FilamentUnlayer;
+namespace CommunitySdks\UnlayerFilament;
 
-use CommunitySdks\FilamentUnlayer\Examples\Database\Seeders\FilamentUnlayerDemoSeeder;
+use CommunitySdks\UnlayerFilament\Examples\Database\Seeders\UnlayerFilamentDemoSeeder;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use ZPMLabs\LaravelPackageQuickDemo\Facades\QuickDemo;
@@ -10,9 +10,9 @@ use ZPMLabs\LaravelPackageQuickDemo\Support\DemoDefinition;
 
 class UnlayerServiceProvider extends PackageServiceProvider
 {
-    public static string $name = 'filament-unlayer';
+    public static string $name = 'unlayer-filament';
 
-    public static string $viewNamespace = 'filament-unlayer';
+    public static string $viewNamespace = 'unlayer-filament';
 
     public function configurePackage(Package $package): void
     {
@@ -39,12 +39,12 @@ class UnlayerServiceProvider extends PackageServiceProvider
     {
         QuickDemo::register(
             DemoDefinition::make(
-                key: 'filament-unlayer-demo',
-                name: 'Filament Unlayer Demo',
-                databaseName: 'filament_unlayer_demo',
+                key: 'unlayer-filament-demo',
+                name: 'Unlayer Filament Demo',
+                databaseName: 'unlayer_filament_demo',
                 migrationsPath: __DIR__ . '/../examples/migrations',
                 seeders: [
-                    FilamentUnlayerDemoSeeder::class,
+                    UnlayerFilamentDemoSeeder::class,
                 ],
                 viewsPath: __DIR__ . '/../examples/views',
             )
